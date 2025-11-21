@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"04eb1514f59e54b5","type":"text","text":"embedder","x":-360,"y":-30,"width":160,"height":60},
+		{"id":"fdbcc6c548df5d6e","type":"text","text":"Vector Storage (ex. Milvus)","x":-140,"y":-30,"width":250,"height":60},
+		{"id":"503a157cfec84abd","x":-680,"y":-30,"width":250,"height":60,"type":"text","text":"Dataset"}
+	],
+	"edges":[
+		{"id":"db32e138280c752b","fromNode":"04eb1514f59e54b5","fromSide":"right","toNode":"fdbcc6c548df5d6e","toSide":"left"},
+		{"id":"ad3bb410505da75f","fromNode":"503a157cfec84abd","fromSide":"right","toNode":"04eb1514f59e54b5","toSide":"left"}
+	]
+}
