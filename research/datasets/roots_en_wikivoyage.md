@@ -7,6 +7,9 @@ tags:
 
 ## Description
 
+Можем получать ссылки по названиям статей
+!!!
+
 - roots_en_wikivoyage — это подмножество большого мультиязычного корпуса ROOTS Corpus, собранного в рамках BigScience. [huggingface.co+1](https://huggingface.co/datasets/bigscience-data/roots_en_wikivoyage)
 - В частности: этот датасет содержит тексты из версии на английском (en) проекта Wikivoyage
 ## Examples

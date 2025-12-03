@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__
+.ipynb_checkpoints/
+*.csv
+*.xlsx
+*.txt
+*.bz2
+*.json
+*.xml
+
