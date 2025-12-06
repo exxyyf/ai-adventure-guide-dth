@@ -46,4 +46,4 @@ AI Adventure Guide решает эту проблему, используя ис
 
 ## Автор
 
-Автор проекта: exxyyf
+Команда DreamTeamHouse
