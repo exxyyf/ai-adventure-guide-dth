@@ -2,6 +2,10 @@
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
+*.parquet
+*.csv
+*.xlsx
+*.txt
 *.pkl
 *.npy
 *.index
