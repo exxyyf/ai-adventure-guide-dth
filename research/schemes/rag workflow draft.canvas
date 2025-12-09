@@ -1,15 +1,18 @@
 {
 	"nodes":[
+		{"id":"9634aa825aa3f6d3","x":-466,"y":130,"width":776,"height":918,"type":"group","label":"not implemented on MVP stage"},
+		{"id":"ce90fa764182b3a7","x":-1420,"y":-280,"width":1266,"height":560,"type":"group","label":"MVP"},
 		{"id":"83b8206ba267b695","type":"group","x":-1280,"y":-280,"width":1114,"height":150,"label":"base dataset"},
 		{"id":"503a157cfec84abd","type":"text","text":"Base \nRoots enwikivoyage","x":-1260,"y":-260,"width":250,"height":110},
 		{"id":"04eb1514f59e54b5","type":"text","text":"embedder","x":-960,"y":-235,"width":160,"height":60},
 		{"id":"fdbcc6c548df5d6e","type":"text","text":"Vector Storage (ex. Milvus)","x":-760,"y":-235,"width":250,"height":60},
-		{"id":"8e49131848ea4439","type":"text","text":"Vectorized wikivoyage","x":-436,"y":-235,"width":250,"height":60},
 		{"id":"e463a986d28f92a7","type":"text","text":"user request\nex. what to do in Paris?","x":-1340,"y":-42,"width":250,"height":60},
 		{"id":"f491aed151e7801b","type":"text","text":"user request\nex. what museums can i visit in Paris?","x":-1400,"y":80,"width":250,"height":110},
 		{"id":"216acdc2ed8cd2ac","type":"text","text":"embedder","x":-980,"y":-42,"width":160,"height":60},
 		{"id":"d17df491fc5a4e7d","type":"text","text":"router\nis our answer enough for user?","x":-447,"y":135,"width":273,"height":125,"color":"5"},
 		{"id":"7e5b9f68d3695f77","type":"text","text":"return our base answer to user","x":-716,"y":404,"width":250,"height":76,"color":"#6b6b6b"},
+		{"id":"4076a8e2b754ca2b","type":"text","text":"LLM механизм уточнения и обогащения","x":-1085,"y":29,"width":250,"height":60},
+		{"id":"8e49131848ea4439","type":"text","text":"Vectorized wikivoyage","x":-436,"y":-235,"width":250,"height":60},
 		{"id":"6756e5747b366744","type":"text","text":"base answer","x":-436,"y":29,"width":250,"height":60},
 		{"id":"4a3ec58c6e74690b","type":"text","text":"llm","x":-436,"y":-95,"width":250,"height":60},
 		{"id":"9ff4cf4916f4373f","type":"text","text":"we ask our agent to search for additional info relevant to user request in wiki API","x":-140,"y":396,"width":250,"height":92},
@@ -17,7 +20,11 @@
 		{"id":"d34fe4f5567eed54","type":"text","text":"wiki API","x":-140,"y":680,"width":250,"height":60},
 		{"id":"6cd679808428763d","type":"text","text":"llm (summarization)","x":40,"y":800,"width":250,"height":60},
 		{"id":"e1c537ef00b3b15a","type":"text","text":"return advanced answer to user","x":40,"y":940,"width":250,"height":88,"color":"#696969"},
-		{"id":"1eeb9bb9287d97b7","type":"text","text":"separate tools for links gathering","x":-1185,"y":512,"width":250,"height":168}
+		{"id":"1eeb9bb9287d97b7","type":"text","text":"separate tools for links gathering\n\nне обязательно","x":-1185,"y":512,"width":250,"height":168},
+		{"id":"e5935225fe678e41","type":"text","text":"тестирование latency\n\n","x":-368,"y":856,"width":288,"height":128},
+		{"id":"33bead5cb82700f2","x":-1085,"y":130,"width":250,"height":60,"type":"text","text":"image as an input"},
+		{"id":"b804eda815a320bd","x":-1090,"y":190,"width":250,"height":60,"type":"text","text":"генерация текстового описания по картинкам"},
+		{"id":"4402d94a1853bfc1","x":-1104,"y":250,"width":289,"height":84,"type":"text","text":"чтобы ходить за картинками не нужно ничего кроме API"}
 	],
 	"edges":[
 		{"id":"db32e138280c752b","fromNode":"04eb1514f59e54b5","fromSide":"right","toNode":"fdbcc6c548df5d6e","toSide":"left"},
@@ -36,6 +43,7 @@
 		{"id":"73c44e8c9dbc43a9","fromNode":"6756e5747b366744","fromSide":"right","toNode":"6cd679808428763d","toSide":"right"},
 		{"id":"4a53b269fb116deb","fromNode":"d34fe4f5567eed54","fromSide":"bottom","toNode":"6cd679808428763d","toSide":"left"},
 		{"id":"196c1fcfa41e4100","fromNode":"6cd679808428763d","fromSide":"bottom","toNode":"e1c537ef00b3b15a","toSide":"top"},
-		{"id":"081fbb855c308e7b","fromNode":"216acdc2ed8cd2ac","fromSide":"right","toNode":"4a3ec58c6e74690b","toSide":"left"}
+		{"id":"081fbb855c308e7b","fromNode":"216acdc2ed8cd2ac","fromSide":"right","toNode":"4a3ec58c6e74690b","toSide":"left"},
+		{"id":"4ee5ab037d4ad63f","fromNode":"4076a8e2b754ca2b","fromSide":"right","toNode":"8e49131848ea4439","toSide":"left"}
 	]
 }
