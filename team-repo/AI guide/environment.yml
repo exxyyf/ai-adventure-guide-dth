@@ -1,0 +1,15 @@
+name: ai-guide
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy<2
+  - pytorch=2.3.*
+  - faiss-cpu=1.7.*
+  - pip
+  - pip:
+      - sentence-transformers==2.2.2
+      - datasets==4.4.1
+      - mistralai==1.9.11
+      - python-dotenv==1.0.1
