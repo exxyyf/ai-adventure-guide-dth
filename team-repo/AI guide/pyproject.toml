@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ai-guide"
+version = "0.1.0"
+description = "RAG pipeline for travel assistant using Wikivoyage dataset"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+mistralai = "1.9.11"
+sentence-transformers = "2.2.2"
+datasets = "4.4.1"
+python-dotenv = "1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+isort = "^6.0.0"
+pytest = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

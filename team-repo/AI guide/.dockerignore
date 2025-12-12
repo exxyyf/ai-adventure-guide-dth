@@ -1,0 +1,27 @@
+.env
+*.env
+*.env.*
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Git
+.git
+.gitignore
+
+# Project artifacts
+.vscode/
+.idea/
+.DS_Store
+
+# Conda environment (если есть)
+env/
+venv/
+.venv/
+
+# Big data
+data/
+notebooks/
+*.faiss
+*.bin
