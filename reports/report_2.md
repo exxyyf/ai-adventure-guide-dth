@@ -58,9 +58,9 @@ todo
 <img src="figures/question_type_cnt.png" alt="question type" width="500">
 
 
-<img src="figures/topic_cnt.png" alt="topic cnt" width="1000">
+<img src="figures/topic_cnt.png" alt="topic cnt" width="800">
 
-EDA для валидационной выборки здесь
+EDA для валидационной выборки [здесь](https://github.com/exxyyf/ai-adventure-guide-dth/blob/main/baselines/validation_data_eda.ipynb)
 
 ### Описание пайплайна тестирования
 
@@ -74,7 +74,7 @@ todo
 
 Мы хотим предоставить пользователю возможность отправлять в систему запрос не только текстом, но и изображением.
 
-Здесь ссылка на технологический обзор и реализацию двух бейслайн решений
+Здесь ссылка на [технологический обзор](https://github.com/exxyyf/ai-adventure-guide-dth/blob/main/baselines/image_as_an_input_report.md) и [реализацию](https://github.com/exxyyf/ai-adventure-guide-dth/tree/main/baselines) двух бейслайн решений
 
 Задачей тестирования было выбрать 1 из 2 решений для дальнейшего встраивания в проект.
 
