@@ -11,3 +11,5 @@ __pycache__/
 *.index
 .env
 *.json
+*.zip
+research/memory/
