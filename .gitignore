@@ -13,3 +13,5 @@ __pycache__/
 *.json
 *.zip
 research/memory/
+*.jpg
+
