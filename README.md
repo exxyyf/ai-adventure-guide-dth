@@ -16,6 +16,8 @@ AI Adventure Guide решает эту проблему, используя ис
 
 # Архитектура пайплайна
 
+Список зависимостей лежит [здесь](https://github.com/exxyyf/ai-adventure-guide-dth/blob/main/team-repo/AI%20guide/pyproject.toml), используется Python 3.11 и Poetry как менеджер пакетов.
+
 Сервис представляет собой RAG-pipeline в качестве baseline решения, который состоит из:
 
 1. Модуля генерации ответов **Generator**:
