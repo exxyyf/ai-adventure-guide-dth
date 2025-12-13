@@ -122,7 +122,8 @@ todo
 - скорость ответа
 
 Ноутбук с тестированием [здесь](https://github.com/exxyyf/ai-adventure-guide-dth/blob/main/baselines/testing_image_input.ipynb)
-Ноутбук с подведением результатов [здесь]()
+
+Ноутбук с подведением результатов [здесь](https://github.com/exxyyf/ai-adventure-guide-dth/blob/main/baselines/testing_image_input_results.ipynb)
 
 ### Тестирование качества распознавания
 
