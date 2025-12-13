@@ -1,0 +1,16 @@
+{
+	"nodes":[
+		{"id":"7c63e8055ad07fab","x":-300,"y":-320,"width":340,"height":200,"type":"group","label":"Backend"},
+		{"id":"285ede8876763cb1","type":"text","text":"user","x":-630,"y":-260,"width":66,"height":60},
+		{"id":"f0e3f21a4c1e6b22","type":"text","text":"tg bot","x":-500,"y":-260,"width":78,"height":60},
+		{"id":"f614997e1e4b895f","type":"text","text":"QuestionUnderstanding","x":-255,"y":-300,"width":250,"height":27},
+		{"id":"179c89e117b46435","type":"text","text":"Retriever","x":-255,"y":-240,"width":250,"height":27},
+		{"id":"2d693364c2964f1b","type":"text","text":"Generator (Mistral LLM)","x":-255,"y":-180,"width":250,"height":27}
+	],
+	"edges":[
+		{"id":"784c7f6ad27b3966","fromNode":"285ede8876763cb1","fromSide":"right","toNode":"f0e3f21a4c1e6b22","toSide":"left"},
+		{"id":"53099a8777391646","fromNode":"f0e3f21a4c1e6b22","fromSide":"right","toNode":"7c63e8055ad07fab","toSide":"left","label":"API"},
+		{"id":"b159762a850eb49a","fromNode":"7c63e8055ad07fab","fromSide":"bottom","toNode":"f0e3f21a4c1e6b22","toSide":"bottom"},
+		{"id":"ae47b063d5e1d71b","fromNode":"f0e3f21a4c1e6b22","fromSide":"left","toNode":"285ede8876763cb1","toSide":"right"}
+	]
+}
