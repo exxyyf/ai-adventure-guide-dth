@@ -60,17 +60,18 @@ https://github.com/Levliv/AI-travel-guide
 1. Пользователь задаёт вопрос через Telegram. Бот получает сообщение и передаёт его в backend.
 2. **Telegram Bot** получает сообщение и отправляет его на Backend API.
 3. **Backend API* обрабатывает запрос: 
-- Передаёт текст в **QuestionUnderstanding**, чтобы определить intent, entities и уточнённый запрос (clarified_query).
-- Получает структурированный JSON с информацией о запросе.
+    - Передаёт текст в **QuestionUnderstanding**, чтобы определить intent, entities и уточнённый запрос (clarified_query).
+    - Получает структурированный JSON с информацией о запросе.
 4. **Retriever** получает clarified_query и ищет наиболее релевантные чанки в FAISS-индексе:
-- С помощью Embedder текст запроса преобразуется в вектор.
-- FAISS индекс возвращает топ-k ближайших векторов.
+    - С помощью Embedder текст запроса преобразуется в вектор.
+    - FAISS индекс возвращает топ-k ближайших векторов.
 5. **Generator** (Mistral LLM) получает:
-- Уточнённый запрос.
-- Релевантные текстовые блоки из Retriever.
-- Генерирует ответ, строго опираясь на найденные данные.
+    - Уточнённый запрос.
+    - Релевантные текстовые блоки из Retriever.
+    - Генерирует ответ, строго опираясь на найденные данные.
 6. **Backend API** отправляет ответ обратно в Telegram Bot.
-7 **Telegram Bot** отображает пользователю сформированный ответ.
+
+7. **Telegram Bot** отображает пользователю сформированный ответ.
 
 
 # Результаты тестирования
@@ -89,13 +90,13 @@ https://github.com/Levliv/AI-travel-guide
 
 Для создания валидационной выборки мы сгенерировали 100 вопросов разного уровня сложности, опираясь на наш датасет, и добавили к ним ground truth с помощью Claude Sonnet 4.5 (ver_long) и Haiku 4.5 (ver_short). В выборку мы включили также off-topic вопросы, на которые система должна отвечать, что запрос нерелевантен теме туризма и путешествий.
 
-<img src="figures/difficulty_level_cnt.png" alt="difficulty level" width="400">
+<img src="figures/difficulty_level_cnt.png" alt="difficulty level" width="300">
 
 
-<img src="figures/question_type_cnt.png" alt="question type" width="500">
+<img src="figures/question_type_cnt.png" alt="question type" width="300">
 
 
-<img src="figures/topic_cnt.png" alt="topic cnt" width="800">
+<img src="figures/topic_cnt.png" alt="topic cnt" width="500">
 
 Структура датасетов: 
 
@@ -364,4 +365,3 @@ siglip:
 | model                          |   latency_emb |   latency_search |   latency_total |
 |:-------------------------------|--------------:|-----------------:|----------------:|
 | google/siglip-base-patch16-384 |      0.168105 |        0.0287856 |        0.196891 |
-
