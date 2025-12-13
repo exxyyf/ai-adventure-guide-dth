@@ -67,6 +67,7 @@ AI Adventure Guide решает эту проблему, используя ис
 - [`datasets_analysis/`](datasets_analysis) - анализ доступных датасетов и подготовка данных
 - [`baselines/`](baselines) - реализация базовых подходов и методов для сравнения
 - [`reports/`](reports) - отчеты о результатах исследований и выводы
+- [`team-repo/AI guide/`](team-repo/) - код основного решения (RAG-pipeline) с инструкцией по запуску
 
 ## Research
 
