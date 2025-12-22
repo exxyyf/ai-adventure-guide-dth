@@ -2,13 +2,15 @@ import os
 from dotenv import load_dotenv
 from mistralai import Mistral
 
-load_dotenv()
+if not os.getenv("MISTRAL_API_KEY"):
+    load_dotenv(dotenv_path=os.path.join(os.getcwd(), ".env"))
 
 
 class Generator:
     def __init__(self, model_name: str = "mistral-small-latest"):
         self.model_name = model_name
         self.client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
+        # self.client = Mistral(api_key='8EqFOreOyLMjFFmPlN3tdDaOq907zAnn')
 
     def generate_answer(self, question: str, retrieved_chunks: list, max_tokens: int = 300) -> str:
         """

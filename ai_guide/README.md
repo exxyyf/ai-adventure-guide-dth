@@ -1,13 +1,17 @@
 # AI Guide — Setup
 
+## 🛠️ Требования для локального запуска
 
-## 🚀 1. Установка окружения
+- Docker (рекомендуется версия 24+)
+- Docker Compose (рекомендуется версия 2+; встроен в Docker Desktop на Windows/macOS)
 
-Создайте conda-окружение:
+## 🚀 1. Запуск проекта
+
+Клонировать репозиторий:
 
 ```bash
-conda env create -f environment.yml
-conda activate ai-guide
+git clone <repo-url>
+cd <repo-folder>
 ```
 
 ## 🔑 2. Настройка ключей
@@ -16,9 +20,14 @@ conda activate ai-guide
 
 ```
 MISTRAL_API_KEY=your_api_key_here
+HF_TOKEN=your_api_key_here
+TELEGRAM_BOT_TOKEN=your_api_key_here
+RAG_PORT=8001
+DATA_DIR=/app/data
+API_URL=http://rag-app:8001/answer
 ```
 
-## 🔑 📥 3. Скачать данные
+##  📥 2. Скачать данные
 
 1. Скачайте архив data/ с Google Drive:
 <https://drive.google.com/file/d/1o9sy59wAFY2utvUHcCxLMOJaSIxFqkQd/view?usp=sharing>
@@ -32,13 +41,23 @@ AI-guide/
     embeddings.faiss
     vector_store.pkl
     ...
+```
+
+## ▶️ 4. Запуск сервиса
 
 
-## ▶️ 4. Запуск RAG-пайплайна
+### 🐳 1. Поднять контейнеры локально
+```
+docker compose up --build
+```
+### 🤖 2. Зайти в телеграм бот @TravelRagTestBot
+Набрать ```/start```, дождаться ответа от бота и задать свой вопрос.
 
-- python main.py --q "France visa?"
 
-- либо poetry run python main.py --q "France visa?"
+### ⚠️ 3. Как отключить сервиc 
+Остановить контейнеры
+```docker compose down```
 
-Вопрос можно/нужно менять!!!
+
+
 

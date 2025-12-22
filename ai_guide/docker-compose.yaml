@@ -1,0 +1,31 @@
+services:
+
+  travel-rag-app:
+    container_name: travel-rag-app
+    build:
+      context: ./rag-app
+    volumes:
+      - ./data:/app/data
+    env_file:
+      - .env
+    ports:
+      - "8001:8001"
+    networks:
+      - rag-network
+    command: ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8001"]
+
+  travel-telegram-bot:
+    container_name: travel-telegram-bot
+    build:
+      context: ./telegram-bot
+    depends_on:
+      - travel-rag-app
+    env_file:
+      - .env
+    networks:
+      - rag-network
+    command: ["python", "bot.py"]
+
+networks:
+  rag-network:
+    driver: bridge
