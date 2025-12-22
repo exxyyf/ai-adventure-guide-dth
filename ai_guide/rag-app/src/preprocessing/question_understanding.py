@@ -4,7 +4,10 @@ from dotenv import load_dotenv
 from mistralai import Mistral  
 import os
 
-load_dotenv()
+# load_dotenv()
+
+if not os.getenv("MISTRAL_API_KEY"):
+    load_dotenv(dotenv_path=os.path.join(os.getcwd(), ".env"))
 
 class QuestionUnderstanding:
     def __init__(self, model_name: str = "mistral-small-latest"):
