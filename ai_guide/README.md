@@ -10,15 +10,16 @@
 Клонировать репозиторий:
 
 ```bash
-git clone <repo-url>
-cd <repo-folder>
+git clone https://github.com/exxyyf/ai-adventure-guide-dth
+cd ai_guide
 ```
 
 ## 🔑 2. Настройка ключей
 
-Создайте файл .env в корне проекта по образцу .env.example:
+Создайте файл .env в ai_guide по образцу .env.example:
 
 ```
+# .env.example
 MISTRAL_API_KEY=your_api_key_here
 HF_TOKEN=your_api_key_here
 TELEGRAM_BOT_TOKEN=your_api_key_here
@@ -32,15 +33,15 @@ API_URL=http://rag-app:8001/answer
 1. Скачайте архив data/ с Google Drive:
 <https://drive.google.com/file/d/1o9sy59wAFY2utvUHcCxLMOJaSIxFqkQd/view?usp=sharing>
 
-2. Распакуйте в корень проекта:
+2. Распакуйте в ai_guide проекта:
 
 ```text
-AI-guide/
+ai_guide/
   data/
-    passages.json
-    embeddings.faiss
-    vector_store.pkl
-    ...
+    chunked_texts.pkl
+    embeddings.npy
+    metadata.json
+    wikivoyage.index
 ```
 
 ## ▶️ 4. Запуск сервиса
@@ -48,10 +49,10 @@ AI-guide/
 
 ### 🐳 1. Поднять контейнеры локально
 ```
-docker compose up --build
+docker compose up -d --build
 ```
-### 🤖 2. Зайти в телеграм бот @TravelRagTestBot
-Набрать ```/start```, дождаться ответа от бота и задать свой вопрос.
+### 🤖 2. Зайти в телеграм бот @ai_journey_guide_bot
+Набрать ```/start```, дождаться ответа от бота и задать свой вопрос. Наш бот работает на английском языке :)
 
 
 ### ⚠️ 3. Как отключить сервиc 
