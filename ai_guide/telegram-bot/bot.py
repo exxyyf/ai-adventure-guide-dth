@@ -1,7 +1,9 @@
+import os
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
+from aiogram.enums import ParseMode
 import httpx
-import os
 import asyncio
 from dotenv import load_dotenv
 
@@ -15,8 +17,20 @@ dp = Dispatcher()
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
-    await message.answer("Привет! Отправь вопрос про путешествия.")
+    await message.answer(
+    """*Hey there, traveler\\!*
 
+I'm your personal travel assistant\\. Ask me about destinations, visas, safety, hotels, food \\- anything travel\\-related\\!
+
+*Quick examples:*
+"Best time to visit Italy?"
+"Visa requirements for Dubai"
+"Cheap eats in Bangkok"
+
+Ready to explore? Just ask away\\! 🌍✈️
+""",
+    parse_mode=ParseMode.MARKDOWN_V2
+)
 @dp.message()
 async def handle_query(message: types.Message):
     print("="*25 + message.text + "="*25 )
@@ -25,7 +39,10 @@ async def handle_query(message: types.Message):
             resp = await client.post(API_URL, json={"text": message.text}) 
             data = resp.json()
             print(data["answer"])
-            await message.answer(str(data["answer"]))
+            await message.answer(
+                str(data["answer"]),
+                parse_mode=ParseMode.HTML,
+                )
         except httpx.ReadTimeout:
             print('TimeOut')
             await message.answer("API request timeout")
