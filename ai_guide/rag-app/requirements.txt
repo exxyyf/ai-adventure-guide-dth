@@ -1,0 +1,10 @@
+numpy<2
+sentence-transformers==5.2.0
+datasets==4.4.1
+mistralai==1.9.11
+faiss-cpu==1.7.4
+python-dotenv==1.0.1
+fastapi
+uvicorn
+anyio>=3.6.2
+
