@@ -1,6 +1,6 @@
 from src.preprocessing.question_understanding import QuestionUnderstanding
 from src.retrieval.retriever import Retriever
-from src.generation.generator import Generator
+from src.generation.generator import Generator, ImageDescriptionGenerator
 
 
 class TravelRAG:
@@ -9,6 +9,7 @@ class TravelRAG:
         self.question_understanding = QuestionUnderstanding()
         self.retriever = Retriever()
         self.generator = Generator()
+        self.image_describer = ImageDescriptionGenerator()
 
     def answer(self, user_query: str) -> str:
         # 1. Understanding
@@ -25,3 +26,9 @@ class TravelRAG:
         )
 
         return answer
+    
+    def answer_image(self, image_query: str) -> str:
+        image_descrition:str = self.image_describer.generate_answer(image_query)
+        print(image_descrition)
+        self.answer(image_descrition)
+

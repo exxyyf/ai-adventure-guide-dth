@@ -200,3 +200,50 @@ Write a complete helpful answer:
 
         except Exception as e:
             return f"Generator error: {str(e)}"
+
+
+class ImageDescriptionGenerator:
+    def __init__(self, model_name: str = "pixtral-12b-2409"):
+        self.model_name = model_name
+        self.client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
+
+    def generate_answer(self, pic_b64: str, max_tokens: int = 2000) -> str:
+        """
+        Generate image description based on photo image.
+
+        :param pic_b64: picture to describe
+        :param max_tokens: maximum length of the generated answer
+        """
+
+        system_prompt = """
+Describe what you see in the image as a travel destination.
+"""
+
+        user_prompt = f"""
+Describe the image
+"""
+
+        try:
+            response = self.client.chat.complete(
+                model=self.model_name,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "image_url",
+                                "image_url": f"data:image/jpeg;base64,{pic_b64}"
+                            }
+                        ]
+                    }
+                ],
+                max_tokens=max_tokens,
+                temperature=0.3,
+            )
+
+            return response.choices[0].message.content.strip()
+
+        except Exception as e:
+            return f"Generator error: {str(e)}"

@@ -1,11 +1,12 @@
 import os
-
+import asyncio
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import Command
 from aiogram.enums import ParseMode
 import httpx
 import asyncio
 from dotenv import load_dotenv
+from aiogram import F
 
 load_dotenv()
 
@@ -14,6 +15,22 @@ API_URL = "http://travel-rag-app:8001/answer"
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
+
+
+@dp.message(F.photo)
+async def handle_photo(message: types.Message):
+    photo = message.photo[-1]
+    file = await bot.get_file(photo.file_id)
+    downloaded = await bot.download_file(file.file_path)
+    
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        try:
+            files = {'file': ('image.jpg', downloaded, 'image/jpeg')}
+            resp = await client.post(f"{API_URL.replace('/answer', '/answer-image')}", files=files)
+            data = resp.json()
+            await message.answer(str(data["answer"]), parse_mode=ParseMode.HTML)
+        except Exception as e:
+            await message.answer(f"Error: {str(e)}")
 
 @dp.message(Command("start"))
 async def start(message: types.Message):
@@ -49,8 +66,6 @@ async def handle_query(message: types.Message):
         except Exception as e:
             print('Exception')
             await message.answer(f"Error: {str(e)}")
-
-import asyncio
 
 async def main():
     print("🤖 Bot starting...")
