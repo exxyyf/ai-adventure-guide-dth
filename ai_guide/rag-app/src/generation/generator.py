@@ -7,7 +7,7 @@ if not os.getenv("MISTRAL_API_KEY"):
 
 
 class Generator:
-    def __init__(self, model_name: str = "mistral-small-latest"):
+    def __init__(self, model_name: str = "mistral-large-2407"):
         self.model_name = model_name
         self.client = Mistral(api_key=os.getenv("MISTRAL_API_KEY"))
 
@@ -40,16 +40,18 @@ CORE PRINCIPLES:
 
 3. HANDLING MISSING INFORMATION
    When context lacks information to answer:
-   - State clearly: "I don't know" or "There is no information available on this"
+   - State clearly: "I don't know"
    - Do NOT elaborate on why you don't know
-   - Do NOT mention the absence of context or documents
+   - Do NOT mention the absence of context or documents at all!
    - Move on immediately without meta-commentary
 
 4. ANSWER COMPLETENESS
-   - Provide thorough explanations, not just brief facts
-   - Include relevant details, examples, and supporting information from context
-   - For complex topics, structure answers with logical progression
    - Synthesize information from multiple parts of context when needed
+   - Scale response length to match question complexity
+   - Be thorough enough to fully answer, but concise enough to stay focused
+   - Include examples and details only when they genuinely clarify or add value
+   - For complex topics, provide structured explanations without over-explaining
+   - Prioritize relevant, actionable information over exhaustive coverage
 
 5. MULTI-HOP REASONING
    - Connect related pieces of information across context passages
