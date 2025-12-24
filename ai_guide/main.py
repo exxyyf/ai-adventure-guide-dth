@@ -1,0 +1,90 @@
+import argparse
+import os
+import sys
+import json
+
+# Импорты модулей
+from rag_app.src.preprocessing.question_understanding import QuestionUnderstanding
+from rag_app.src.retrieval.retriever import Retriever
+from rag_app.src.generation.generator import Generator
+
+def main():
+    parser = argparse.ArgumentParser(description="AI Travel Assistant RAG Service")
+    parser.add_argument("--q", "--query", type=str, required=True, help="User question")
+    parser.add_argument("--save", action="store_true", help="Save results for RAGAS evaluation")
+    args = parser.parse_args()
+
+    user_query = args.q
+
+    # 1. Анализ запроса
+    print("\nUnderstanding query...")
+    try:
+        question_understanding = QuestionUnderstanding()
+        analysis = question_understanding.analyze(user_query)
+    except Exception as e:
+        print(f"Error in QuestionUnderstanding: {e}")
+        sys.exit(1)
+
+    print("➡ Intent:", analysis.get("intent"))
+    print("➡ Entities:", analysis.get("entities"))
+    print("➡ Clarified query:", analysis.get("clarified_query"))
+    print("➡ Needs more info:", analysis.get("needs_more_info"))
+
+    clarified_query = analysis.get("clarified_query", user_query)
+
+    # 2. Retrieval
+    print("\nRetrieving relevant context...")
+    try:
+        retriever = Retriever()
+        retrieved_chunks = retriever.retrieve(clarified_query)
+    except Exception as e:
+        print(f"Error in Retriever: {e}")
+        sys.exit(1)
+
+    print(f"➡ Retrieved {len(retrieved_chunks)} chunks")
+
+    # 3. Generation
+    print("\n✍ Generating answer...")
+    try:
+        generator = Generator()
+        answer = generator.generate_answer(clarified_query, retrieved_chunks)
+    except Exception as e:
+        print(f"Error in Generator: {e}")
+        sys.exit(1)
+
+    print("\n💬 Final Answer:")
+    print(answer)
+
+    # 4. Saving data for evaluating by RAGAS (if flag --save) 
+    if args.save:
+        print("\nSaving data for RAGAS evaluation...")
+        try:
+            record = {
+                "query": user_query,
+                "clarified_query": clarified_query,
+                "answer": answer,
+                "contexts": retrieved_chunks,
+                "retrieved_k": len(retrieved_chunks)
+            }
+
+            eval_dir = os.path.join(os.path.dirname(__file__), "../evaluation")
+            os.makedirs(eval_dir, exist_ok=True)
+            file_path = os.path.join(eval_dir, "rag_evaluation_data.jsonl")
+
+            with open(file_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False, indent=None) + "\n")
+
+            print(f"Data saved in {file_path}")
+            print(f"   Query: '{user_query[:50]}...'")
+            print(f"   Chunks saved: {len(retrieved_chunks)}")
+
+        except Exception as e:
+            print(f" Error while saving data for evaluation: {e}")
+    else:
+        print("\n[Info] RAGAS data saving skipped (use --save flag to enable)")
+
+if __name__ == "__main__":
+    # Запуск из корня проекта:
+    # python -m src.main --q "your question here"
+    # python -m src.main --q "your question here" --save
+    main()

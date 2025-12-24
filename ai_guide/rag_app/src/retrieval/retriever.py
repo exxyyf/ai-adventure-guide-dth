@@ -11,7 +11,10 @@ from pathlib import Path
 import os
 
 # DATA_DIR = Path(os.environ["DATA_DIR"])
-DATA_DIR = os.getenv("DATA_DIR", "/app/data")
+# DATA_DIR = os.getenv("DATA_DIR", "/app/data")
+SCRIPT_DIR = Path(__file__).resolve().parent
+AI_GUIDE_DIR = SCRIPT_DIR.parents[2]
+DATA_DIR = AI_GUIDE_DIR / "data"
 
 
 
@@ -19,7 +22,7 @@ class Retriever:
     def __init__(self):
         # Проверяем существование директории
         if not os.path.exists(DATA_DIR):
-            raise FileNotFoundError(f"Data directory not found: {DATA_DIR}")
+            raise FileNotFoundError(f"Data directory not found: {DATA_DIR}, {print(os.path.dirname(os.path.abspath(__file__)))}")
 
         # Загрузка индекса и чанков
         self.index = faiss.read_index(os.path.join(DATA_DIR, "wikivoyage.index"))

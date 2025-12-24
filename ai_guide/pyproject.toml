@@ -5,11 +5,13 @@ description = "RAG pipeline for travel assistant using Wikivoyage dataset"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.11.14"
 mistralai = "1.9.11"
 sentence-transformers = "5.2.0"
 datasets = "4.4.1"
 python-dotenv = "1.0.1"
+faiss-cpu = "^1.13.1"
+setuptools = "^80.9.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
