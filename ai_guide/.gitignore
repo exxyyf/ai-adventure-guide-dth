@@ -32,3 +32,7 @@ venv/
 *.idx
 *.faiss
 *.bin
+
+# Directory with testing data
+evaluation/
+

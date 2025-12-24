@@ -12,6 +12,10 @@ datasets = "4.4.1"
 python-dotenv = "1.0.1"
 faiss-cpu = "^1.13.1"
 setuptools = "^80.9.0"
+ipykernel = "^7.1.0"
+ragas = "^0.4.2"
+matplotlib = "^3.10.8"
+seaborn = "^0.13.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
