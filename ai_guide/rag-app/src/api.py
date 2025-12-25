@@ -27,6 +27,5 @@ async def answer_image(file: UploadFile = File(...), caption: str = Form("")):
     contents = await file.read()
     # Конвертируем в base64
     pic_b64 = base64.b64encode(contents).decode("utf-8")
-    answer = rag.answer_image(pic_b64) or ""
-    answer = rag.answer(caption + '\n\n' + answer)
+    answer = rag.answer_image(pic_b64, caption)
     return {"answer": answer}

@@ -216,11 +216,19 @@ class ImageDescriptionGenerator:
         """
 
         system_prompt = """
-Describe what you see in the image as a travel destination.
+You are a travel guide AI that analyzes images of destinations.
+
+Return your answer in JSON with the following fields:
+- name: name of the landmark or "Unknown" if you cannot determine landmark
+- location: city and country or "Unknown" if you cannot determine city or country
+- setting: it can be seaside, mountains, city or "Unknown" if you cannot determine
+If you are unsure, do not guess.
+
+Return only valid JSON
 """
 
         user_prompt = f"""
-Describe the image
+What place is shown on this image?
 """
 
         try:

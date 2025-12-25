@@ -1,3 +1,5 @@
+import json
+
 from src.preprocessing.question_understanding import QuestionUnderstanding
 from src.retrieval.retriever import Retriever
 from src.generation.generator import Generator, ImageDescriptionGenerator
@@ -26,9 +28,45 @@ class TravelRAG:
         )
 
         return answer
-    
-    def answer_image(self, image_query: str) -> str:
-        image_descrition:str = self.image_describer.generate_answer(image_query)
-        print(image_descrition)
-        self.answer(image_descrition)
 
+
+    def answer_image(self, pic_b64: str, caption: str = "") -> str:
+        """
+        Full image → RAG pipeline:
+        image → pixtral → structured text → retrieval → answer
+        """
+
+        image_description_raw = self.image_describer.generate_answer(pic_b64)
+        try:
+            image_description = json.loads(image_description_raw)
+        except json.JSONDecodeError:
+            # если Pixtral сломался
+            image_description = {
+                "name": "Unknown",
+                "location": "Unknown",
+                "setting": "Unknown"
+            }
+
+        # Build text query for RAG
+        image_query_parts = []
+
+        if image_description["name"] != "Unknown":
+            image_query_parts.append(
+                f"This place is {image_description['name']}."
+            )
+        if image_description["location"] != "Unknown":
+            image_query_parts.append(
+                f"It is located in {image_description['location']}."
+            )
+        if image_description["setting"] != "Unknown":
+            image_query_parts.append(
+                f"The setting is {image_description['setting']}."
+            )
+        image_query = " ".join(image_query_parts)
+        # Merge with user caption (if any)
+        if caption.strip():
+            final_query = f"{image_query}\n\nUser question:\n{caption}"
+        else:
+            final_query = image_query
+
+        return self.answer(final_query)
