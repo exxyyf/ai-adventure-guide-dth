@@ -23,10 +23,14 @@ async def handle_photo(message: types.Message):
     file = await bot.get_file(photo.file_id)
     downloaded = await bot.download_file(file.file_path)
     
+    # Получаем текст, если есть
+    caption = message.caption or ""
+    
     async with httpx.AsyncClient(timeout=60.0) as client:
         try:
             files = {'file': ('image.jpg', downloaded, 'image/jpeg')}
-            resp = await client.post(f"{API_URL.replace('/answer', '/answer-image')}", files=files)
+            data_payload = {'caption': caption}
+            resp = await client.post(f"{API_URL.replace('/answer', '/answer-image')}", files=files, data=data_payload)
             data = resp.json()
             await message.answer(str(data["answer"]), parse_mode=ParseMode.HTML)
         except Exception as e:
