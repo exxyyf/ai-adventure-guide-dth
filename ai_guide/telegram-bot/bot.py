@@ -49,7 +49,7 @@ async def start(message: types.Message):
     await message.answer(
     """<b>Hey there, traveler!</b>
 
-I'm your personal travel assistant. Ask me about destinations, visas, safety, hotels, food - anything travel-related!
+I'm your personal travel assistant. Ask me about destinations, visas, food - anything travel-related!
 
 <b>Quick examples:</b>
 "Best time to visit Italy?"
