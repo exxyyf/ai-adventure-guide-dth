@@ -250,7 +250,6 @@ What place is shown on this image?
                 max_tokens=max_tokens,
                 temperature=0.3,
             )
-
             return response.choices[0].message.content.strip()
 
         except Exception as e:

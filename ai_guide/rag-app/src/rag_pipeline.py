@@ -3,7 +3,7 @@ import json
 from src.preprocessing.question_understanding import QuestionUnderstanding
 from src.retrieval.retriever import Retriever
 from src.generation.generator import Generator, ImageDescriptionGenerator
-
+from src.preprocessing.pixtral_parser import parse_pixtral_json_simple
 
 class TravelRAG:
     def __init__(self):
@@ -38,18 +38,16 @@ class TravelRAG:
 
         image_description_raw = self.image_describer.generate_answer(pic_b64)
         try:
-            image_description = json.loads(image_description_raw)
-        except json.JSONDecodeError:
+            image_description = parse_pixtral_json_simple(image_description_raw)
+        except ValueError:
             # если Pixtral сломался
             image_description = {
                 "name": "Unknown",
                 "location": "Unknown",
                 "setting": "Unknown"
             }
-
         # Build text query for RAG
         image_query_parts = []
-
         if image_description["name"] != "Unknown":
             image_query_parts.append(
                 f"This place is {image_description['name']}."
@@ -68,5 +66,4 @@ class TravelRAG:
             final_query = f"{image_query}\n\nUser question:\n{caption}"
         else:
             final_query = image_query
-
         return self.answer(final_query)
