@@ -7,6 +7,7 @@ import httpx
 import asyncio
 from dotenv import load_dotenv
 from aiogram import F
+import re
 
 load_dotenv()
 
@@ -18,11 +19,47 @@ dp = Dispatcher()
 
 
 async def send_long_message(message: types.Message, text: str, chunk_size: int = 4096):
-    """Отправляет длинное сообщение частями"""
-    for i in range(0, len(text), chunk_size):
-        chunk = text[i:i + chunk_size]
+    """Отправляет длинное сообщение частями, сохраняя целостность HTML-тегов"""
+    if len(text) <= chunk_size:
+        await message.answer(text, parse_mode=ParseMode.HTML)
+        return
+    
+    chunks = []
+    current_pos = 0
+    
+    while current_pos < len(text):
+        # Берем chunk
+        end_pos = min(current_pos + chunk_size, len(text))
+        chunk = text[current_pos:end_pos]
+        
+        # Ищем незакрытые теги
+        open_tags = re.findall(r'<(b|i|u|code|pre|a[^>]*)>', chunk)
+        close_tags = re.findall(r'</(b|i|u|code|pre|a)>', chunk)
+        
+        # Считаем открытые теги (без пары)
+        tag_stack = []
+        for tag in open_tags:
+            tag_name = tag.split()[0]  # для <a href...> берем только 'a'
+            tag_stack.append(tag_name)
+        for tag in close_tags:
+            if tag_stack and tag_stack[-1] == tag:
+                tag_stack.pop()
+        
+        # Если есть незакрытые теги, откатываемся до последнего полного тега
+        if tag_stack and end_pos < len(text):
+            # Ищем последний закрывающий тег в chunk
+            last_close = max([chunk.rfind(f'</{t}>') for t in ['b', 'i', 'u', 'code', 'pre', 'a']] + [-1])
+            if last_close > 0:
+                end_pos = current_pos + last_close + len('</x>')
+                chunk = text[current_pos:end_pos]
+        
+        chunks.append(chunk)
+        current_pos = end_pos
+    
+    # Отправляем chunks
+    for chunk in chunks:
         await message.answer(chunk, parse_mode=ParseMode.HTML)
-        await asyncio.sleep(0.05)  # Небольшая задержка между сообщениями
+        await asyncio.sleep(0.05)
 
 
 @dp.message(F.photo)

@@ -216,7 +216,7 @@ class ImageDescriptionGenerator:
         """
 
         system_prompt = """
-You are a travel guide AI that analyzes images of destinations.
+You are a landmark identification expert.
 
 Return your answer in JSON with the following fields:
 - name: name of the landmark or "Unknown" if you cannot determine landmark
