@@ -1,0 +1,23 @@
+{
+	"nodes":[
+		{"id":"6acd0879c8ab1567","x":-821,"y":-420,"width":561,"height":253,"type":"group","label":"Backend"},
+		{"id":"738aa8c7012cac5b","x":-1053,"y":-420,"width":213,"height":254,"type":"group","label":"Tg bot interface"},
+		{"id":"285ede8876763cb1","type":"text","text":"User","x":-1280,"y":-325,"width":140,"height":70},
+		{"id":"fd1d8088bef8fd59","x":-1021,"y":-395,"width":141,"height":75,"type":"text","text":"Text Query"},
+		{"id":"3ac203430baa6629","x":-1021,"y":-266,"width":141,"height":75,"type":"text","text":"Image Query"},
+		{"id":"f614997e1e4b895f","type":"text","text":"QuestionUnderstanding\n(Mistral LLM)","x":-801,"y":-395,"width":221,"height":75},
+		{"id":"d79edbdaec1aa62c","x":-801,"y":-270,"width":221,"height":83,"type":"text","text":"ImageCaptioning (Pixtral) -> Image Description"},
+		{"id":"6998b82c5144e154","type":"text","text":"Retriever","x":-500,"y":-395,"width":220,"height":75},
+		{"id":"05db614ec43d35f8","type":"text","text":"Generator (Mistral LLM)","x":-500,"y":-271,"width":220,"height":82}
+	],
+	"edges":[
+		{"id":"6cbe94c05618a4fa","fromNode":"285ede8876763cb1","fromSide":"right","toNode":"fd1d8088bef8fd59","toSide":"left"},
+		{"id":"54929f29f4842586","fromNode":"285ede8876763cb1","fromSide":"right","toNode":"3ac203430baa6629","toSide":"left"},
+		{"id":"1f307ebb109a7761","fromNode":"fd1d8088bef8fd59","fromSide":"right","toNode":"f614997e1e4b895f","toSide":"left","label":"API"},
+		{"id":"f91d4fd8ff673182","fromNode":"3ac203430baa6629","fromSide":"right","toNode":"d79edbdaec1aa62c","toSide":"left","label":"API"},
+		{"id":"5837a3b26ba4afec","fromNode":"d79edbdaec1aa62c","fromSide":"right","toNode":"f614997e1e4b895f","toSide":"right"},
+		{"id":"4d921df75a452ff6","fromNode":"f614997e1e4b895f","fromSide":"right","toNode":"6998b82c5144e154","toSide":"left"},
+		{"id":"ee6f6bf0284a9d06","fromNode":"6998b82c5144e154","fromSide":"bottom","toNode":"05db614ec43d35f8","toSide":"top"},
+		{"id":"749d15ab8daaf82b","fromNode":"05db614ec43d35f8","fromSide":"bottom","toNode":"285ede8876763cb1","toSide":"bottom"}
+	]
+}
